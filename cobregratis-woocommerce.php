@@ -92,3 +92,32 @@ function wc_cobregratis_hides_when_is_outside_brazil( $available_gateways ) {
 }
 
 add_filter( 'woocommerce_available_payment_gateways', 'wc_cobregratis_hides_when_is_outside_brazil' );
+
+/**
+ * Display pending payment instructions in order details.
+ *
+ * @param  int $order_id Order ID.
+ *
+ * @return string        Message HTML.
+ */
+function wc_cobregratis_pending_payment_instructions( $order_id ) {
+	$order = new WC_Order( $order_id );
+
+	if ( 'on-hold' === $order->status && 'cobregratis' == $order->payment_method ) {
+		$html = '<div class="woocommerce-info">';
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Pay the billet', 'cobregratis-woocommerce' ) );
+
+		$message = sprintf( __( '%sAttention!%s Not registered the billet payment for this order yet.', 'cobregratis-woocommerce' ), '<strong>', '</strong>' ) . '<br />';
+		$message .= __( 'Please click the following button and pay the billet in your Internet Banking.', 'cobregratis-woocommerce' ) . '<br />';
+		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', 'cobregratis-woocommerce' ) . '<br />';
+		$message .= __( 'Ignore this message if the payment has already been made​​.', 'cobregratis-woocommerce' ) . '<br />';
+
+		$html .= apply_filters( 'wc_cobregratis_pending_payment_instructions', $message, $order );
+
+		$html .= '</div>';
+
+		echo $html;
+	}
+}
+
+add_action( 'woocommerce_view_order', 'wc_cobregratis_pending_payment_instructions' );

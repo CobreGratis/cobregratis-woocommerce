@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cobre Grátis for WooCommerce v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-01-18 04:10:39+0000\n"
+"PO-Revision-Date: 2014-01-18 04:12:54+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -319,7 +319,7 @@ msgstr "Tenha certeza que configurou este link %s em seu webhook."
 #: includes/class-wc-cobregratis-gateway.php:519
 #@ cobregratis-woocommerce
 msgid "Cobre Gr&aacute;tis request failure"
-msgstr "Falha de requisição do Cobre Grátis"
+msgstr "Falha na requisição do Cobre Grátis"
 
 #: includes/class-wc-cobregratis-gateway.php:545
 #@ cobregratis-woocommerce

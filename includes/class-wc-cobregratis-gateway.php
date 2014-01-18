@@ -42,7 +42,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		// Define user set variables.
 		$this->title         = $this->get_option( 'title' );
 		$this->description   = $this->get_option( 'description' );
-		$this->username      = $this->get_option( 'username' );
 		$this->token         = $this->get_option( 'token' );
 		$this->days_to_pay   = $this->get_option( 'days_to_pay', 5 );
 		$this->demonstrative = $this->get_option( 'demonstrative' );
@@ -97,11 +96,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 */
 	protected function admin_notices() {
 		if ( is_admin() ) {
-			// Checks if username is not empty.
-			if ( empty( $this->username ) ) {
-				add_action( 'admin_notices', array( $this, 'username_missing_message' ) );
-			}
-
 			// Checks if token is not empty.
 			if ( empty( $this->token ) ) {
 				add_action( 'admin_notices', array( $this, 'token_missing_message' ) );
@@ -137,7 +131,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	public function is_available() {
 		// Test if is valid for use.
 		$available = ( 'yes' == $this->get_option( 'enabled' ) ) &&
-					! empty( $this->username ) &&
 					! empty( $this->token ) &&
 					$this->using_supported_currency();
 
@@ -188,13 +181,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				'type'        => 'textarea',
 				'description' => __( 'This controls the description which the user sees during checkout.', $this->plugin_slug ),
 				'default'     => __( 'Pay using bank billet', $this->plugin_slug )
-			),
-			'username' => array(
-				'title'       => __( 'Cobre Gr&aacute;tis Username', $this->plugin_slug ),
-				'type'        => 'text',
-				'description' => __( 'Please enter your Cobre Gr&aacute;tis username. This is needed in order to take payment.', $this->plugin_slug ),
-				'desc_tip'    => true,
-				'default'     => ''
 			),
 			'token' => array(
 				'title'       => __( 'Cobre Gr&aacute;tis Token', $this->plugin_slug ),
@@ -515,17 +501,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		}
 
 		return admin_url( 'admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Cobregratis_Gateway' );
-	}
-
-	/**
-	 * Adds error message when not configured the username.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return string Error Mensage.
-	 */
-	public function username_missing_message() {
-		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your username. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
 	}
 
 	/**

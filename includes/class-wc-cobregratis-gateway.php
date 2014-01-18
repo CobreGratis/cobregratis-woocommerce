@@ -323,7 +323,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		}
 
 		// Notification.
-		if ( 'true' == $this->notification ) {
+		if ( 'yes' == $this->notification ) {
 			$args['notify_overdue'] = true;
 		}
 

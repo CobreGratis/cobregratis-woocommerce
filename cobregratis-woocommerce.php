@@ -105,7 +105,7 @@ function wc_cobregratis_pending_payment_instructions( $order_id ) {
 
 	if ( 'on-hold' === $order->status && 'cobregratis' == $order->payment_method ) {
 		$html = '<div class="woocommerce-info">';
-		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Pay the billet', 'cobregratis-woocommerce' ) );
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Billet print', 'cobregratis-woocommerce' ) );
 
 		$message = sprintf( __( '%sAttention!%s Not registered the billet payment for this order yet.', 'cobregratis-woocommerce' ), '<strong>', '</strong>' ) . '<br />';
 		$message .= __( 'Please click the following button and pay the billet in your Internet Banking.', 'cobregratis-woocommerce' ) . '<br />';

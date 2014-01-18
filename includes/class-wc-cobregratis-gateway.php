@@ -185,8 +185,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'token' => array(
 				'title'       => __( 'Cobre Gr&aacute;tis Token', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment.', $this->plugin_slug ),
-				'desc_tip'    => true,
+				'description' => __( 'Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment.', $this->plugin_slug ) . ' ' . sprintf( __( 'You can generate a token by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/myinfo" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ),
 				'default'     => ''
 			),
 			'options' => array(
@@ -197,7 +196,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'days_to_pay' => array(
 				'title'       => __( 'Days to pay', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Enter with the number of days the customer will have to pay the ticket.', $this->plugin_slug ),
+				'description' => __( 'Enter with the number of days the customer will have to pay the billet.', $this->plugin_slug ),
 				'desc_tip'    => true,
 				'default'     => '5'
 			),
@@ -219,7 +218,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				'default'     => ''
 			),
 			'interest_day' => array(
-				'title'       => __( 'Percentage of interest per Day', $this->plugin_slug ),
+				'title'       => __( 'Percentage of interest per day', $this->plugin_slug ),
 				'type'        => 'text',
 				'description' => __( 'Enter with an integer.', $this->plugin_slug ),
 				'desc_tip'    => true,
@@ -443,7 +442,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 */
 	public function thankyou_page( $order_id ) {
 		$html = '<div class="woocommerce-message">';
-		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order_id, 'cobregratis_url', true ), __( 'Pay the billet', $this->plugin_slug ) );
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order_id, 'cobregratis_url', true ), __( 'Billet print', $this->plugin_slug ) );
 
 		$message = sprintf( __( '%sAttention!%s You will not get the billet by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
 		$message .= __( 'Please click the following button and pay the billet in your Internet Banking.', $this->plugin_slug ) . '<br />';
@@ -481,7 +480,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 
 		$html .= apply_filters( 'woocommerce_cobregratis_email_instructions', $message );
 
-		$html .= '<br />' . sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Pay the billet &rarr;', $this->plugin_slug ) ) . '<br />';
+		$html .= '<br />' . sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Billet print &rarr;', $this->plugin_slug ) ) . '<br />';
 
 		$html .= '</p>';
 

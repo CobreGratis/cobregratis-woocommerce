@@ -56,6 +56,8 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		// add_action( 'woocommerce_api_wc_cobregratis_gateway', array( $this, 'check_ipn_response' ) );
 		// add_action( 'valid_cobregratis_ipn_request', array( $this, 'successful_request' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
+		// add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 2 );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -398,7 +400,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 
 		if ( $billet ) {
 			// Mark as on-hold (we're awaiting the payment).
-			$order->update_status( 'on-hold', __( 'Awaiting billet payment', $this->plugin_slug ) );
+			$order->update_status( 'on-hold', __( 'Awaiting billet payment.', $this->plugin_slug ) );
 
 			// Reduce stock levels.
 			$order->reduce_order_stock();
@@ -430,6 +432,32 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				'result' => 'fail'
 			);
 		}
+	}
+
+    /**
+     * Output for the order received page.
+     *
+     * @since  1.0.0
+     *
+     * @param  int    $order_id Order ID.
+     *
+     * @return string           Payment instructions.
+     */
+	public function thankyou_page( $order_id ) {
+		$billet_url = get_post_meta( $order_id, 'cobregratis_url', true );
+
+		$html = '<div class="woocommerce-message">';
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', $billet_url, __( 'Pay the billet', $this->plugin_slug ) );
+
+		$message = sprintf( __( '%sAttention!%s You will not get the ticket by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
+		$message .= __( 'Please click the following button and pay the Boleto in your Internet Banking.', $this->plugin_slug ) . '<br />';
+		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', $this->plugin_slug ) . '<br />';
+
+		$html .= apply_filters( 'woocommerce_cobregratis_thankyou_page_message', $message );
+
+		$html .= '</div>';
+
+		echo $html;
 	}
 
 	/**

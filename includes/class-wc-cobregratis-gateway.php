@@ -57,7 +57,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		// add_action( 'valid_cobregratis_ipn_request', array( $this, 'successful_request' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
-		// add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 2 );
+		add_action( 'woocommerce_email_after_order_table', array( $this, 'email_instructions' ), 10, 2 );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -164,6 +164,8 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	/**
 	 * Initialise Gateway Settings Form Fields.
 	 *
+	 * @since  1.0.0
+	 *
 	 * @return void
 	 */
 	public function init_form_fields() {
@@ -263,9 +265,9 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  object $order WC_Order data.
+	 * @param  WC_Order $order Order data.
 	 *
-	 * @return array         Payment data.
+	 * @return array           Payment data.
 	 */
 	protected function payment_data( $order ) {
 		$args = array(
@@ -326,9 +328,9 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  object $order WC_Order data.
+	 * @param  WC_Order $order Order data.
 	 *
-	 * @return mixed         False in error and array in success.
+	 * @return bool           Fail or success.
 	 */
 	protected function generate_billet( $order ) {
 		$url  = $this->api_url . 'bank_billets.json';
@@ -371,7 +373,11 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->bank_billet->id );
 				}
 
-				return $data;
+				// Save billet data in order meta.
+				add_post_meta( $order->id, 'cobregratis_id', $data->bank_billet->id );
+				add_post_meta( $order->id, 'cobregratis_url', $data->bank_billet->external_link );
+
+				return true;
 			}
 		}
 
@@ -408,10 +414,6 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			// Remove cart.
 			$this->woocommerce_instance()->cart->empty_cart();
 
-			// Save billet data in order.
-			add_post_meta( $order->id, 'cobregratis_id', $billet->bank_billet->id );
-			add_post_meta( $order->id, 'cobregratis_url', $billet->bank_billet->external_link );
-
 			// Sets the return url.
 			if ( version_compare( $this->woocommerce_instance()->version, '2.1', '>=' ) ) {
 				$url = $order->get_checkout_order_received_url();
@@ -434,28 +436,58 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		}
 	}
 
-    /**
-     * Output for the order received page.
-     *
-     * @since  1.0.0
-     *
-     * @param  int    $order_id Order ID.
-     *
-     * @return string           Payment instructions.
-     */
+	/**
+	 * Adds payment instructions on thankyou page.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  int    $order_id Order ID.
+	 *
+	 * @return string           Payment instructions.
+	 */
 	public function thankyou_page( $order_id ) {
-		$billet_url = get_post_meta( $order_id, 'cobregratis_url', true );
-
 		$html = '<div class="woocommerce-message">';
-		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', $billet_url, __( 'Pay the billet', $this->plugin_slug ) );
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order_id, 'cobregratis_url', true ), __( 'Pay the billet', $this->plugin_slug ) );
 
-		$message = sprintf( __( '%sAttention!%s You will not get the ticket by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
-		$message .= __( 'Please click the following button and pay the Boleto in your Internet Banking.', $this->plugin_slug ) . '<br />';
+		$message = sprintf( __( '%sAttention!%s You will not get the billet by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
+		$message .= __( 'Please click the following button and pay the billet in your Internet Banking.', $this->plugin_slug ) . '<br />';
 		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', $this->plugin_slug ) . '<br />';
 
-		$html .= apply_filters( 'woocommerce_cobregratis_thankyou_page_message', $message );
+		$html .= apply_filters( 'woocommerce_cobregratis_thankyou_page_instructions', $message );
 
 		$html .= '</div>';
+
+		echo $html;
+	}
+
+	/**
+	 * Adds payment instructions on customer email.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  WC_Order $order         Order data.
+	 * @param  bool     $sent_to_admin Sent to admin.
+	 *
+	 * @return string                  Payment instructions.
+	 */
+	public function email_instructions( $order, $sent_to_admin ) {
+		if ( $sent_to_admin || $order->status !== 'on-hold' || $order->payment_method !== $this->id ) {
+			return;
+		}
+
+		$html = '<h2>' . __( 'Payment', $this->plugin_slug ) . '</h2>';
+
+		$html .= '<p class="order_details">';
+
+		$message = sprintf( __( '%sAttention!%s You will not get the billet by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
+		$message .= __( 'Please click the following link and pay the billet in your Internet Banking.', $this->plugin_slug ) . '<br />';
+		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', $this->plugin_slug ) . '<br />';
+
+		$html .= apply_filters( 'woocommerce_cobregratis_email_instructions', $message );
+
+		$html .= '<br />' . sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Pay the billet &rarr;', $this->plugin_slug ) ) . '<br />';
+
+		$html .= '</p>';
 
 		echo $html;
 	}

@@ -28,7 +28,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		$this->icon               = apply_filters( 'woocommerce_cobregratis_icon', '' );
 		$this->has_fields         = false;
 		$this->method_title       = __( 'Cobre Gr&aacute;tis', $this->plugin_slug );
-		$this->method_description = __( 'Start getting money by bank billet in your checking account using Cobre Grátis.', $this->plugin_slug );
+		$this->method_description = __( 'Start getting money by bank billet in your checking account using Cobre Gr&aacute;tis.', $this->plugin_slug );
 
 		// API.
 		$this->api_url = 'https://app.cobregratis.com.br/';
@@ -43,6 +43,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		$this->title         = $this->get_option( 'title' );
 		$this->description   = $this->get_option( 'description' );
 		$this->token         = $this->get_option( 'token' );
+		$this->code          = $this->get_option( 'code' );
 		$this->days_to_pay   = $this->get_option( 'days_to_pay', 5 );
 		$this->demonstrative = $this->get_option( 'demonstrative' );
 		$this->instructions  = $this->get_option( 'instructions' );
@@ -52,8 +53,8 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		$this->debug         = $this->get_option( 'debug' );
 
 		// Actions.
-		// add_action( 'woocommerce_api_wc_cobregratis_gateway', array( $this, 'check_ipn_response' ) );
-		// add_action( 'valid_cobregratis_ipn_request', array( $this, 'successful_request' ) );
+		add_action( 'woocommerce_api_wc_cobregratis_gateway', array( $this, 'check_webhook_notification' ) );
+		add_action( 'woocommerce_cobregratis_webhook_notification', array( $this, 'successful_webhook_notification' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
 		add_action( 'woocommerce_email_after_order_table', array( $this, 'email_instructions' ), 10, 2 );
@@ -99,6 +100,11 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			// Checks if token is not empty.
 			if ( empty( $this->token ) ) {
 				add_action( 'admin_notices', array( $this, 'token_missing_message' ) );
+			}
+
+			// Checks if security code is not empty.
+			if ( empty( $this->code ) ) {
+				add_action( 'admin_notices', array( $this, 'code_missing_message' ) );
 			}
 
 			// Checks that the currency is supported.
@@ -185,7 +191,13 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'token' => array(
 				'title'       => __( 'Cobre Gr&aacute;tis Token', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment.', $this->plugin_slug ) . ' ' . sprintf( __( 'You can generate a token by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/myinfo" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ),
+				'description' => __( 'Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can generate a token by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/myinfo" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ),
+				'default'     => ''
+			),
+			'code' => array(
+				'title'       => __( 'Webhook security code', $this->plugin_slug ),
+				'type'        => 'text',
+				'description' => __( 'Please enter your webhook security code. This is needed to receive notifications when the billet is paid.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can configure a webhook by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/services" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ) . '<br />' . sprintf( __( 'Be sure to set the %s url for your webhook.', $this->plugin_slug ), '<code>' . home_url( '/?wc-api=WC_Cobregratis_Gateway' ) . '</code>' ),
 				'default'     => ''
 			),
 			'options' => array(
@@ -273,6 +285,9 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'instructions'         => $this->instructions,
 			'percent_fines'        => $this->fines,
 			'percent_interest_day' => $this->interest_day,
+
+			// Meta for IPN.
+			'meta'                 => 'order-' . $this->id
 		);
 
 		// WooCommerce Extra Checkout Fields for Brazil person type fields.
@@ -488,6 +503,50 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	}
 
 	/**
+	 * Check API Response.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void
+	 */
+	public function check_webhook_notification() {
+		@ob_clean();
+
+		if ( isset( $_POST['service_code'] ) && $this->code == $_POST['service_code'] ) {
+			header( 'HTTP/1.1 200 OK' );
+			do_action( 'woocommerce_cobregratis_webhook_notification', $_POST );
+		} else {
+			wp_die( __( 'Cobre Gr&aacute;tis request failure', $this->plugin_slug ) );
+		}
+	}
+
+	/**
+	 * Successful webhook notification.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $data $_POST data from the webhook.
+	 *
+	 * @return void        Updated the order status to processing.
+	 */
+	public function successful_webhook_notification( $data ) {
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Received the webhook notification with the following data: ' . print_r( $data, true ) );
+		}
+
+		$order_id = intval( str_replace( 'order-', '', $data['meta'] ) );
+		$order = new WC_Order( $order_id );
+
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Updating to processing the status of the order ' . $order->get_order_number() );
+		}
+
+		// Complete the order.
+		$order->add_order_note( __( 'Cobre Gr&aacute;tis: Payment approved.', $this->plugin_slug ) );
+		$order->payment_complete();
+	}
+
+	/**
 	 * Gets the admin url.
 	 *
 	 * @since  1.0.0
@@ -511,6 +570,17 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 */
 	public function token_missing_message() {
 		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your token. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
+	}
+
+	/**
+	 * Adds error message when not configured the security code.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string Error Mensage.
+	 */
+	public function code_missing_message() {
+		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your webhook security code. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
 	}
 
 	/**

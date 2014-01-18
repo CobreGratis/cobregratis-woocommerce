@@ -310,6 +310,16 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			if ( isset( $order->billing_neighborhood ) && ! empty( $order->billing_neighborhood ) ) {
 				$args['neighborhood'] = $order->billing_neighborhood;
 			}
+
+			// WooCommerce Extra Checkout Fields for Brazil number field.
+			if ( isset( $order->billing_number ) && ! empty( $order->billing_number ) ) {
+				$args['address'] .= ', ' . $order->billing_number;
+			}
+
+			// Address complement.
+			if ( ! empty( $order->billing_address_2 ) ) {
+				$args['address'] .= ', ' . $order->billing_address_2;
+			}
 		}
 
 		// Notification.

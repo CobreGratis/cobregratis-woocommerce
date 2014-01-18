@@ -40,11 +40,17 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->title       = $this->get_option( 'title' );
-		$this->description = $this->get_option( 'description' );
-		$this->username    = $this->get_option( 'username' );
-		$this->password    = $this->get_option( 'password' );
-		$this->debug       = $this->get_option( 'debug' );
+		$this->title         = $this->get_option( 'title' );
+		$this->description   = $this->get_option( 'description' );
+		$this->username      = $this->get_option( 'username' );
+		$this->token         = $this->get_option( 'token' );
+		$this->days_to_pay   = $this->get_option( 'days_to_pay', 5 );
+		$this->demonstrative = $this->get_option( 'demonstrative' );
+		$this->instructions  = $this->get_option( 'instructions' );
+		$this->fines         = $this->get_option( 'fines' );
+		$this->interest_day  = $this->get_option( 'interest_day' );
+		$this->notification  = $this->get_option( 'notification' );
+		$this->debug         = $this->get_option( 'debug' );
 
 		// Actions.
 		// add_action( 'woocommerce_api_wc_cobregratis_gateway', array( $this, 'check_ipn_response' ) );
@@ -94,9 +100,9 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				add_action( 'admin_notices', array( $this, 'username_missing_message' ) );
 			}
 
-			// Checks if password is not empty.
-			if ( empty( $this->password ) ) {
-				add_action( 'admin_notices', array( $this, 'password_missing_message' ) );
+			// Checks if token is not empty.
+			if ( empty( $this->token ) ) {
+				add_action( 'admin_notices', array( $this, 'token_missing_message' ) );
 			}
 
 			// Checks that the currency is supported.
@@ -130,10 +136,27 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		// Test if is valid for use.
 		$available = ( 'yes' == $this->get_option( 'enabled' ) ) &&
 					! empty( $this->username ) &&
-					! empty( $this->password ) &&
+					! empty( $this->token ) &&
 					$this->using_supported_currency();
 
 		return $available;
+	}
+
+	/**
+	 * Add error message in checkout.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $message Error message.
+	 *
+	 * @return string          Displays the error message.
+	 */
+	protected function add_error( $message ) {
+		if ( version_compare( $this->woocommerce_instance()->version, '2.1', '>=' ) ) {
+			wc_add_notice( $message, 'error' );
+		} else {
+			$this->woocommerce_instance()->add_error( $message );
+		}
 	}
 
 	/**
@@ -169,11 +192,53 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				'desc_tip'    => true,
 				'default'     => ''
 			),
-			'password' => array(
-				'title'       => __( 'Cobre Gr&aacute;tis Password', $this->plugin_slug ),
+			'token' => array(
+				'title'       => __( 'Cobre Gr&aacute;tis Token', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Please enter your Cobre Gr&aacute;tis password. This is needed to process the payment.', $this->plugin_slug ),
+				'description' => __( 'Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment.', $this->plugin_slug ),
 				'desc_tip'    => true,
+				'default'     => ''
+			),
+			'options' => array(
+				'title'       => __( 'Billet options', $this->plugin_slug ),
+				'type'        => 'title',
+				'description' => ''
+			),
+			'days_to_pay' => array(
+				'title'       => __( 'Days to pay', $this->plugin_slug ),
+				'type'        => 'text',
+				'description' => __( 'Enter with the number of days the customer will have to pay the ticket.', $this->plugin_slug ),
+				'desc_tip'    => true,
+				'default'     => '5'
+			),
+			'demonstrative' => array(
+				'title'       => __( 'Demonstrative', $this->plugin_slug ),
+				'type'        => 'textarea',
+				'default'     => ''
+			),
+			'instructions' => array(
+				'title'       => __( 'Cashier instructions', $this->plugin_slug ),
+				'type'        => 'textarea',
+				'default'     => ''
+			),
+			'fines' => array(
+				'title'       => __( 'Fines percentage', $this->plugin_slug ),
+				'type'        => 'text',
+				'description' => __( 'Enter with an integer.', $this->plugin_slug ),
+				'desc_tip'    => true,
+				'default'     => ''
+			),
+			'interest_day' => array(
+				'title'       => __( 'Percentage of interest per Day', $this->plugin_slug ),
+				'type'        => 'text',
+				'description' => __( 'Enter with an integer.', $this->plugin_slug ),
+				'desc_tip'    => true,
+				'default'     => ''
+			),
+			'notification' => array(
+				'title'       => __( 'Non-payment notification', $this->plugin_slug ),
+				'type'        => 'checkbox',
+				'description' => __( 'If the ticket has not been paid after 2 days of winning you will receive a notification in your Cobre Gr&aacute;tis email.', $this->plugin_slug ),
 				'default'     => ''
 			),
 			'testing' => array(
@@ -186,9 +251,133 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', $this->plugin_slug ),
 				'default'     => 'no',
-				'description' => sprintf( __( 'Log Cobre Gr&aacute;tis events, such as API requests, inside %s', $this->plugin_slug ), '<code>woocommerce/logs/cobregratis-' . sanitize_file_name( wp_hash( 'cobregratis' ) ) . '.txt</code>' )
+				'description' => sprintf( __( 'Log Cobre Gr&aacute;tis events, such as API requests, inside %s', $this->plugin_slug ), '<code>woocommerce/logs/' . $this->id . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.txt</code>' )
 			)
 		);
+	}
+
+	/**
+	 * Create the payment data.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  object $order WC_Order data.
+	 *
+	 * @return array         Payment data.
+	 */
+	protected function payment_data( $order ) {
+		$args = array(
+			// Customer data.
+			'name'                 => $order->billing_first_name . ' ' . $order->billing_last_name,
+
+			// Order data.
+			'amount'               => number_format( $order->order_total, 2, ',', '' ),
+			'expire_at'            => date( 'd/m/Y', time() + ( $this->days_to_pay * 86400 ) ),
+
+			// Document data.
+			'quantity'             => 1,
+			'document_amount'      => number_format( $order->order_total, 2, ',', '' ),
+			'document_date'        => date( 'd/m/Y' ),
+			'document_number'      => ltrim( $order->get_order_number(), '#' ),
+			'document_type'	       => 'FAT',
+			'description'          => $this->demonstrative,
+			'instructions'         => $this->instructions,
+			'percent_fines'        => $this->fines,
+			'percent_interest_day' => $this->interest_day,
+		);
+
+		// WooCommerce Extra Checkout Fields for Brazil person type fields.
+		if ( isset( $order->billing_persontype ) && ! empty( $order->billing_persontype ) ) {
+			if ( 2 == $order->billing_persontyp ) {
+				$args['cnpj_cpf'] = $order->billing_cnpj;
+			} else {
+				$args['cnpj_cpf'] = $order->billing_cpf;
+			}
+		}
+
+		// Address.
+		if ( isset( $order->billing_postcode ) && ! empty( $order->billing_postcode ) ) {
+			$args['address'] = $order->billing_address_1;
+			$args['city']    = $order->billing_city;
+			$args['state']   = $order->billing_state;
+			$args['zipcode'] = $order->billing_postcode;
+
+			// WooCommerce Extra Checkout Fields for Brazil neighborhood field.
+			if ( isset( $order->billing_neighborhood ) && ! empty( $order->billing_neighborhood ) ) {
+				$args['neighborhood'] = $order->billing_neighborhood;
+			}
+		}
+
+		// Notification.
+		if ( 'true' == $this->notification ) {
+			$args['notify_overdue'] = true;
+		}
+
+		// Sets a filter for custom arguments.
+		$args = apply_filters( 'woocommerce_cobregratis_billet_data', $args, $order );
+
+		return $args;
+	}
+
+	/**
+	 * Generate the billet on Cobre Grátis.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  object $order WC_Order data.
+	 *
+	 * @return mixed         False in error and array in success.
+	 */
+	protected function generate_billet( $order ) {
+		$url  = $this->api_url . 'bank_billets.json';
+		$body = $this->payment_data( $order );
+
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Creating billet for order ' . $order->get_order_number() . ' with the following data: ' . print_r( $body, true ) );
+		}
+
+		$params = array(
+			'method'     => 'POST',
+			'body'       => json_encode( $body ),
+			'sslverify'  => false,
+			'timeout'    => 60,
+			'headers'    => array(
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Basic ' . base64_encode( $this->token . ':X' )
+			)
+		);
+
+		$response = wp_remote_post( $url, $params );
+
+		if ( is_wp_error( $response ) ) {
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( $this->id, 'WP_Error in generate the billet: ' . $response->get_error_message() );
+			}
+		} elseif ( 201 == $response['response']['code'] && 'Created' == $response['response']['message'] ) {
+			try {
+				$data = json_decode( $response['body'] );
+			} catch ( Exception $e ) {
+				$data = '';
+
+				if ( 'yes' == $this->debug ) {
+					$this->log->add( $this->id, 'Error while parsing the Cobre Gratis response: ' . print_r( $e->getMessage(), true ) );
+				}
+			}
+
+			if ( isset( $data->id ) ) {
+				if ( 'yes' == $this->debug ) {
+					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->id );
+				}
+
+				return $data;
+			}
+		}
+
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Request error: ' . print_r( $response, true ) );
+		}
+
+		return false;
 	}
 
 	/**
@@ -198,10 +387,49 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 *
 	 * @param  int    $order_id Order ID.
 	 *
-	 * @return array            TODO.
+	 * @return array            Redirect when has success and display error notices when fail.
 	 */
 	public function process_payment( $order_id ) {
+		// Gets the order data.
 		$order = new WC_Order( $order_id );
+
+		// Generate the billet.
+		$billet = $this->generate_billet( $order );
+
+		if ( $billet ) {
+			// Mark as on-hold (we're awaiting the payment).
+			$order->update_status( 'on-hold', __( 'Awaiting billet payment', $this->plugin_slug ) );
+
+			// Reduce stock levels.
+			$order->reduce_order_stock();
+
+			// Remove cart.
+			$this->woocommerce_instance()->cart->empty_cart();
+
+			// Save billet data in order.
+			add_post_meta( $order->id, 'cobregratis_id', $billet->id );
+			add_post_meta( $order->id, 'cobregratis_url', $billet->external_link );
+
+			// Sets the return url.
+			if ( version_compare( $this->woocommerce_instance()->version, '2.1', '>=' ) ) {
+				$url = $order->get_checkout_order_received_url();
+			} else {
+				$url = add_query_arg( 'key', $order->order_key, add_query_arg( 'order', $order_id, get_permalink( woocommerce_get_page_id( 'thanks' ) ) ) );
+			}
+
+			// Return thankyou redirect.
+			return array(
+				'result'   => 'success',
+				'redirect' => $url
+			);
+		} else {
+			// Added error message.
+			$this->add_error( '<strong>' . __( '', $this->plugin_slug ) . '</strong>: ' . __( 'An error has occurred while processing your payment, please try again. Or contact us for assistance.', $this->plugin_slug ) );
+
+			return array(
+				'result' => 'fail'
+			);
+		}
 	}
 
 	/**
@@ -231,14 +459,14 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	}
 
 	/**
-	 * Adds error message when not configured the password.
+	 * Adds error message when not configured the token.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return string Error Mensage.
 	 */
-	public function password_missing_message() {
-		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your password. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
+	public function token_missing_message() {
+		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your token. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
 	}
 
 	/**

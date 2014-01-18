@@ -364,9 +364,9 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 				}
 			}
 
-			if ( isset( $data->id ) ) {
+			if ( isset( $data->bank_billet ) ) {
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->id );
+					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->bank_billet->id );
 				}
 
 				return $data;
@@ -407,8 +407,8 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			$this->woocommerce_instance()->cart->empty_cart();
 
 			// Save billet data in order.
-			add_post_meta( $order->id, 'cobregratis_id', $billet->id );
-			add_post_meta( $order->id, 'cobregratis_url', $billet->external_link );
+			add_post_meta( $order->id, 'cobregratis_id', $billet->bank_billet->id );
+			add_post_meta( $order->id, 'cobregratis_url', $billet->bank_billet->external_link );
 
 			// Sets the return url.
 			if ( version_compare( $this->woocommerce_instance()->version, '2.1', '>=' ) ) {
@@ -424,7 +424,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			);
 		} else {
 			// Added error message.
-			$this->add_error( '<strong>' . __( '', $this->plugin_slug ) . '</strong>: ' . __( 'An error has occurred while processing your payment, please try again. Or contact us for assistance.', $this->plugin_slug ) );
+			$this->add_error( '<strong>' . $this->title . '</strong>: ' . __( 'An error has occurred while processing your payment, please try again. Or contact us for assistance.', $this->plugin_slug ) );
 
 			return array(
 				'result' => 'fail'

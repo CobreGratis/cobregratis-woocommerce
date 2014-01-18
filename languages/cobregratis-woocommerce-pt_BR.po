@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cobre Grátis for WooCommerce v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-01-18 03:36:02+0000\n"
+"PO-Revision-Date: 2014-01-18 04:10:39+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -74,14 +74,14 @@ msgid "%sAttention!%s Not registered the billet payment for this order yet."
 msgstr "%sAtenção!%s Não foi registrado o pagamento do boleto deste pedido ainda."
 
 #: cobregratis-woocommerce.php:111
-#: includes/class-wc-cobregratis-gateway.php:448
+#: includes/class-wc-cobregratis-gateway.php:463
 #@ cobregratis-woocommerce
 msgid "Please click the following button and pay the billet in your Internet Banking."
 msgstr "Por favor, clique no botão ao lado para pagar o boleto pelo seu Internet Banking."
 
 #: cobregratis-woocommerce.php:112
-#: includes/class-wc-cobregratis-gateway.php:449
-#: includes/class-wc-cobregratis-gateway.php:479
+#: includes/class-wc-cobregratis-gateway.php:464
+#: includes/class-wc-cobregratis-gateway.php:494
 #@ cobregratis-woocommerce
 msgid "If you prefer, print and pay at any bank branch or home lottery."
 msgstr "Se você preferir, é possível imprimir e pagar em qualquer agencia bancária ou casa lotérica."
@@ -92,202 +92,243 @@ msgid "Ignore this message if the payment has already been made​​."
 msgstr "Ignore esta mensagem caso o pagamento já foi feito."
 
 #: includes/class-wc-cobregratis-gateway.php:30
-#: includes/class-wc-cobregratis-gateway.php:513
-#: includes/class-wc-cobregratis-gateway.php:524
+#: includes/class-wc-cobregratis-gateway.php:572
+#: includes/class-wc-cobregratis-gateway.php:583
+#: includes/class-wc-cobregratis-gateway.php:594
 #@ cobregratis-woocommerce
 msgid "Cobre Gr&aacute;tis"
 msgstr "Cobre Grátis"
 
-#: includes/class-wc-cobregratis-gateway.php:31
-#@ cobregratis-woocommerce
-msgid "Start getting money by bank billet in your checking account using Cobre Grátis."
-msgstr "Comece a receber dinheiro por boleto bancário e recebendo em usa conta usando o Cobre Grátis"
-
-#: includes/class-wc-cobregratis-gateway.php:167
+#: includes/class-wc-cobregratis-gateway.php:173
 #@ cobregratis-woocommerce
 msgid "Enable/Disable"
 msgstr "Habilitar/Desabilitar"
 
-#: includes/class-wc-cobregratis-gateway.php:169
+#: includes/class-wc-cobregratis-gateway.php:175
 #@ cobregratis-woocommerce
 msgid "Enable Cobre Gr&aacute;tis"
 msgstr "Habilitar Cobre Grátis"
 
-#: includes/class-wc-cobregratis-gateway.php:173
+#: includes/class-wc-cobregratis-gateway.php:179
 #@ cobregratis-woocommerce
 msgid "Title"
 msgstr "Título"
 
-#: includes/class-wc-cobregratis-gateway.php:175
+#: includes/class-wc-cobregratis-gateway.php:181
 #@ cobregratis-woocommerce
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isto controla o título que o cliente irá ver durante a finalização do pedido."
 
-#: includes/class-wc-cobregratis-gateway.php:177
+#: includes/class-wc-cobregratis-gateway.php:183
 #@ cobregratis-woocommerce
 msgid "Bank billet"
 msgstr "Boleto bancário"
 
-#: includes/class-wc-cobregratis-gateway.php:180
+#: includes/class-wc-cobregratis-gateway.php:186
 #@ cobregratis-woocommerce
 msgid "Description"
 msgstr "Descrição"
 
-#: includes/class-wc-cobregratis-gateway.php:182
+#: includes/class-wc-cobregratis-gateway.php:188
 #@ cobregratis-woocommerce
 msgid "This controls the description which the user sees during checkout."
 msgstr "Isto controla a descrição que o cliente irá ver durante a finalização do pedido."
 
-#: includes/class-wc-cobregratis-gateway.php:183
+#: includes/class-wc-cobregratis-gateway.php:189
 #@ cobregratis-woocommerce
 msgid "Pay using bank billet"
 msgstr "Pagar usando boleto bancário"
 
-#: includes/class-wc-cobregratis-gateway.php:186
+#: includes/class-wc-cobregratis-gateway.php:192
 #@ cobregratis-woocommerce
 msgid "Cobre Gr&aacute;tis Token"
 msgstr "Token do Cobre Grátis"
 
-#: includes/class-wc-cobregratis-gateway.php:188
+#: includes/class-wc-cobregratis-gateway.php:194
 #@ cobregratis-woocommerce
 msgid "Please enter your Cobre Gr&aacute;tis token. This is needed to process the payment."
 msgstr "Por favor, digite o seu token do Cobre Grátis. Isto é necessário para processar o pagamento."
 
-#: includes/class-wc-cobregratis-gateway.php:192
+#: includes/class-wc-cobregratis-gateway.php:204
 #@ cobregratis-woocommerce
 msgid "Billet options"
 msgstr "Opções do boleto"
 
-#: includes/class-wc-cobregratis-gateway.php:197
+#: includes/class-wc-cobregratis-gateway.php:209
 #@ cobregratis-woocommerce
 msgid "Days to pay"
 msgstr "Dias para pagar"
 
-#: includes/class-wc-cobregratis-gateway.php:204
+#: includes/class-wc-cobregratis-gateway.php:216
 #@ cobregratis-woocommerce
 msgid "Demonstrative"
 msgstr "Demonstrativo"
 
-#: includes/class-wc-cobregratis-gateway.php:209
+#: includes/class-wc-cobregratis-gateway.php:221
 #@ cobregratis-woocommerce
 msgid "Cashier instructions"
 msgstr "Informações para o caixa"
 
-#: includes/class-wc-cobregratis-gateway.php:214
+#: includes/class-wc-cobregratis-gateway.php:226
 #@ cobregratis-woocommerce
 msgid "Fines percentage"
 msgstr "Percentual de multa"
 
-#: includes/class-wc-cobregratis-gateway.php:216
-#: includes/class-wc-cobregratis-gateway.php:223
+#: includes/class-wc-cobregratis-gateway.php:228
+#: includes/class-wc-cobregratis-gateway.php:235
 #@ cobregratis-woocommerce
 msgid "Enter with an integer."
 msgstr "Digite um número inteiro."
 
-#: includes/class-wc-cobregratis-gateway.php:228
+#: includes/class-wc-cobregratis-gateway.php:240
 #@ cobregratis-woocommerce
 msgid "Non-payment notification"
 msgstr "Notificação de pagamento pendente"
 
-#: includes/class-wc-cobregratis-gateway.php:230
+#: includes/class-wc-cobregratis-gateway.php:242
 #@ cobregratis-woocommerce
 msgid "If the ticket has not been paid after 2 days of winning you will receive a notification in your Cobre Gr&aacute;tis email."
 msgstr "Se o boleto não for pagamento depois de 2 dias do vencimento você receberá uma notificação em seu e-mail cadastrado Cobre Grátis."
 
-#: includes/class-wc-cobregratis-gateway.php:234
+#: includes/class-wc-cobregratis-gateway.php:246
 #@ cobregratis-woocommerce
 msgid "Gateway Testing"
 msgstr "Testes do portal de pagamento"
 
-#: includes/class-wc-cobregratis-gateway.php:239
+#: includes/class-wc-cobregratis-gateway.php:251
 #@ cobregratis-woocommerce
 msgid "Debug Log"
 msgstr "Log de depuração"
 
-#: includes/class-wc-cobregratis-gateway.php:241
+#: includes/class-wc-cobregratis-gateway.php:253
 #@ cobregratis-woocommerce
 msgid "Enable logging"
 msgstr "Ativar log"
 
-#: includes/class-wc-cobregratis-gateway.php:243
+#: includes/class-wc-cobregratis-gateway.php:255
 #, php-format
 #@ cobregratis-woocommerce
 msgid "Log Cobre Gr&aacute;tis events, such as API requests, inside %s"
 msgstr "Log com eventos do Cobre Grátis, como requisições a API, dentro de %s"
 
-#: includes/class-wc-cobregratis-gateway.php:404
+#: includes/class-wc-cobregratis-gateway.php:419
 #@ cobregratis-woocommerce
 msgid "Awaiting billet payment."
 msgstr "Aguardando pagamento do boleto."
 
-#: includes/class-wc-cobregratis-gateway.php:426
+#: includes/class-wc-cobregratis-gateway.php:441
 #@ cobregratis-woocommerce
 msgid "An error has occurred while processing your payment, please try again. Or contact us for assistance."
 msgstr "Um erro ocorreu ao processar o seu pagamento, por favor, tente novamente, ou entre em contato para solicitar ajudar."
 
-#: includes/class-wc-cobregratis-gateway.php:447
-#: includes/class-wc-cobregratis-gateway.php:477
+#: includes/class-wc-cobregratis-gateway.php:462
+#: includes/class-wc-cobregratis-gateway.php:492
 #, php-format
 #@ cobregratis-woocommerce
 msgid "%sAttention!%s You will not get the billet by Correios."
 msgstr "%sAtenção!%s O seu boleto não será entregue pelos Correios."
 
-#: includes/class-wc-cobregratis-gateway.php:473
+#: includes/class-wc-cobregratis-gateway.php:488
 #@ cobregratis-woocommerce
 msgid "Payment"
 msgstr "Pagamento"
 
-#: includes/class-wc-cobregratis-gateway.php:478
+#: includes/class-wc-cobregratis-gateway.php:493
 #@ cobregratis-woocommerce
 msgid "Please click the following link and pay the billet in your Internet Banking."
 msgstr "Por favor, clique no link a baixo para pagar o boleto pelo seu Internet Banking."
 
-#: includes/class-wc-cobregratis-gateway.php:513
+#: includes/class-wc-cobregratis-gateway.php:572
+#: includes/class-wc-cobregratis-gateway.php:583
 #@ cobregratis-woocommerce
 msgid "Click here to configure!"
 msgstr "Clique aqui para configurar!"
 
-#: includes/class-wc-cobregratis-gateway.php:513
+#: includes/class-wc-cobregratis-gateway.php:572
 #, php-format
 #@ cobregratis-woocommerce
 msgid "You should inform your token. %s"
 msgstr "Você precisa informar o seu token. %s"
 
-#: includes/class-wc-cobregratis-gateway.php:524
+#: includes/class-wc-cobregratis-gateway.php:594
 #, php-format
 #@ cobregratis-woocommerce
 msgid "Currency <code>%s</code> is not supported. Works only with Brazilian Real."
 msgstr "A moeda <code>%s</code> não é suportada. Funciona apenas com real (BRL)."
 
-#: includes/class-wc-cobregratis-gateway.php:188
+#: includes/class-wc-cobregratis-gateway.php:194
 #, php-format
 #@ cobregratis-woocommerce
 msgid "You can generate a token by clicking %s."
 msgstr "Você pode gerar um token clicando %s."
 
-#: includes/class-wc-cobregratis-gateway.php:188
+#: includes/class-wc-cobregratis-gateway.php:194
+#: includes/class-wc-cobregratis-gateway.php:200
 #@ cobregratis-woocommerce
 msgid "here"
 msgstr "aqui"
 
-#: includes/class-wc-cobregratis-gateway.php:199
+#: includes/class-wc-cobregratis-gateway.php:211
 #@ cobregratis-woocommerce
 msgid "Enter with the number of days the customer will have to pay the billet."
 msgstr "Digite o número de dias que o cliente terá para pagar o boleto."
 
-#: includes/class-wc-cobregratis-gateway.php:221
+#: includes/class-wc-cobregratis-gateway.php:233
 #@ cobregratis-woocommerce
 msgid "Percentage of interest per day"
 msgstr "Percentual de juros ao dia"
 
 #: cobregratis-woocommerce.php:108
-#: includes/class-wc-cobregratis-gateway.php:445
+#: includes/class-wc-cobregratis-gateway.php:460
 #@ cobregratis-woocommerce
 msgid "Billet print"
 msgstr "Imprimir boleto"
 
-#: includes/class-wc-cobregratis-gateway.php:483
+#: includes/class-wc-cobregratis-gateway.php:498
 #@ cobregratis-woocommerce
 msgid "Billet print &rarr;"
 msgstr "Imprimir boleto &rarr;"
+
+#: includes/class-wc-cobregratis-gateway.php:31
+#@ cobregratis-woocommerce
+msgid "Start getting money by bank billet in your checking account using Cobre Gr&aacute;tis."
+msgstr "Comece a ganhar dinheiro por boleto bancário e recebendo em sua conta usando o Cobre Grátis."
+
+#: includes/class-wc-cobregratis-gateway.php:198
+#@ cobregratis-woocommerce
+msgid "Webhook security code"
+msgstr " Código de segurança do webhook"
+
+#: includes/class-wc-cobregratis-gateway.php:200
+#@ cobregratis-woocommerce
+msgid "Please enter your webhook security code. This is needed to receive notifications when the billet is paid."
+msgstr "Por favor, digite o seu código de segurança do webhook. Isto é necessário para receber notificações sobre boletos pagos."
+
+#: includes/class-wc-cobregratis-gateway.php:200
+#, php-format
+#@ cobregratis-woocommerce
+msgid "You can configure a webhook by clicking %s."
+msgstr "Você pode configurar um webhook clicando aqui."
+
+#: includes/class-wc-cobregratis-gateway.php:200
+#, php-format
+#@ cobregratis-woocommerce
+msgid "Be sure to set the %s url for your webhook."
+msgstr "Tenha certeza que configurou este link %s em seu webhook."
+
+#: includes/class-wc-cobregratis-gateway.php:519
+#@ cobregratis-woocommerce
+msgid "Cobre Gr&aacute;tis request failure"
+msgstr "Falha de requisição do Cobre Grátis"
+
+#: includes/class-wc-cobregratis-gateway.php:545
+#@ cobregratis-woocommerce
+msgid "Cobre Gr&aacute;tis: Payment approved."
+msgstr "Cobre Grátis: Pagamento aprovado."
+
+#: includes/class-wc-cobregratis-gateway.php:583
+#, php-format
+#@ cobregratis-woocommerce
+msgid "You should inform your webhook security code. %s"
+msgstr "Você precisa informar o seu código de segurança do webhook. %s"
 

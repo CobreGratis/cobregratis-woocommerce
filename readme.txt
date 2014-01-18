@@ -1,23 +1,23 @@
-# Cobre Grátis WooCommerce #
-**Contributors:** cobregratis, claudiosanches  
-**Tags:** checkout, billet, boleto, cobregratis  
-**Requires at least:** 3.5  
-**Tested up to:** 3.8  
-**Stable tag:** 1.0.0  
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+=== Cobre Grátis WooCommerce ===
+Contributors: cobregratis, claudiosanches
+Tags: checkout, billet, boleto, cobregratis
+Requires at least: 3.5
+Tested up to: 3.8
+Stable tag: 1.0.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Start getting money by bank billet in your checking account using Cobre Grátis
 
-## Description ##
+== Description ==
 
 ### Description (en): ###
 
 ### Descrição (pt_BR): ###
 
-### Instalação: ###
+= Instalação: =
 
-### Dúvidas? ###
+= Dúvidas? =
 
 Você pode esclarecer suas dúvidas usando:
 
@@ -25,59 +25,57 @@ Você pode esclarecer suas dúvidas usando:
 * Criando um tópico no [fórum do GitHub](https://github.com/BielSystems/cobregratis-woocommerce/issues).
 * Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/cobregratis-woocommerce) (apenas em inglês).
 
-### Coloborar ###
+= Coloborar =
 
 Você pode contribuir com código-fonte em nossa página no [GitHub](https://github.com/BielSystems/cobregratis-woocommerce).
 
-## Installation ##
+== Installation ==
 
 ### Instalation guid (en): ###
 
-### Install ###
+= Install =
 
-### Cobre Grátis Configuration ###
+= Cobre Grátis Configuration =
 
-### Plugin Configuration ###
+= Plugin Configuration =
 
 ### Guia de instalação (pt_BR): ###
 
-### Instalação ###
+= Instalação =
 
-### Configuração do Cobre Grátis ###
+= Configuração do Cobre Grátis =
 
-### Configuração do plugin ###
+= Configuração do plugin =
 
-## Frequently Asked Questions ##
+== Frequently Asked Questions ==
 
 ### FAQ (en): ###
 
-### What do I need to use this plugin? ###
+= What do I need to use this plugin? =
 
-### How work the Cobre Grátis? ###
+= How work the Cobre Grátis? =
 
 ### FAQ (pt_BR): ###
 
-### O que eu preciso para utilizar este plugin? ###
+= O que eu preciso para utilizar este plugin? =
 
-## Screenshots ##
+== Screenshots ==
 
-### 1. Plugin Settings. ###
-![1. Plugin Settings.](http://s.wordpress.org/extend/plugins/cobre-grátis-woocommerce/screenshot-1.png)
+1. Plugin Settings.
 
+== Changelog ==
 
-## Changelog ##
-
-### 1.0.0 ###
+= 1.0.0 =
 
 * Initial release.
 
-## Upgrade Notice ##
+== Upgrade Notice ==
 
-### 1.0.0 ###
+= 1.0.0 =
 
 * Initial release.
 
-## License ##
+== License ==
 
 Cobre Grátis WooCommerce is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

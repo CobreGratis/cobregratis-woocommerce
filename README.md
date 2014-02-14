@@ -1,5 +1,5 @@
 # Cobre Grátis WooCommerce #
-**Contributors:** cobregratis, claudiosanches  
+**Contributors:** claudiosanches  
 **Tags:** checkout, billet, boleto, cobregratis  
 **Requires at least:** 3.5  
 **Tested up to:** 3.8.1  

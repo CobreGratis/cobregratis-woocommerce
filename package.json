@@ -1,0 +1,17 @@
+{
+  "name": "cobregratis-woocommerce",
+  "description": "Start getting money by bank billet in your checking account using Cobre Grátis",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "load-grunt-tasks": "0.2.0",
+    "grunt-contrib-imagemin": "~0.4.0",
+    "grunt-rsync": "~0.2.1",
+    "grunt-shell": "~0.6.1"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.1.0"
+  }
+}

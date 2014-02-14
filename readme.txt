@@ -96,6 +96,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 == Adicionar um ícone no método de pagamento ==
 
+
 	/**
 	 * Adicionar um ícone para Cobre Grátis.
 	 *
@@ -109,7 +110,9 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 	add_filter( 'woocommerce_cobregratis_icon', 'custom_woocommerce_cobregratis_icon' );
 
+
 == Alterar os parametros postados para o Cobre Grátis ==
+
 
 	/**
 	 * Customizar os dados postados para o Cobre Grátis.
@@ -128,7 +131,9 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 	add_filter( 'woocommerce_cobregratis_billet_data', 'custom_woocommerce_cobregratis_billet_data', 10, 2 );
 
+
 == Alterar as instruções do boleto na página de "obrigado" (thankyou page) ==
+
 
 	/**
 	 * Customizar as instruções sobre o boleto na página "obrigado".
@@ -144,7 +149,9 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 	add_filter( 'woocommerce_cobregratis_thankyou_page_instructions', 'custom_woocommerce_cobregratis_thankyou_page_instructions', 10, 2 );
 
+
 == Alterar as instruções do boleto no e-mail ==
+
 
 	/**
 	 * Customizar as instruções sobre o boleto no e-mail.
@@ -160,7 +167,9 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 	add_filter( 'woocommerce_cobregratis_email_instructions', 'custom_woocommerce_cobregratis_email_instructions', 10, 2 );
 
+
 == Alterar as instruções do boleto para pedidos que estão aguardando pagamento ==
+
 
 	/**
 	 * Customizar as instruções do boleto para pedidos que estão aguardando pagamento.
@@ -175,6 +184,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 	}
 
 	add_filter( 'woocommerce_cobregratis_pending_payment_instructions', 'custom_woocommerce_cobregratis_pending_payment_instructions', 10, 2 );
+
 
 == Screenshots ==
 

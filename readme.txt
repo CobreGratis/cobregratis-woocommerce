@@ -94,7 +94,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 É possível usar qualquer um dos exemplos abaixo dentro do `functions.php` do seu tema ou criando um plugin (veja como em [WordPress - Writing a Plugin](http://codex.wordpress.org/Writing_a_Plugin)).
 
-== Adicionar um ícone no método de pagamento ==
+= Adicionar um ícone no método de pagamento: =
 
 
 	/**
@@ -111,7 +111,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 	add_filter( 'woocommerce_cobregratis_icon', 'custom_woocommerce_cobregratis_icon' );
 
 
-== Alterar os parametros postados para o Cobre Grátis ==
+= Alterar os parametros postados para o Cobre Grátis: =
 
 
 	/**
@@ -132,7 +132,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 	add_filter( 'woocommerce_cobregratis_billet_data', 'custom_woocommerce_cobregratis_billet_data', 10, 2 );
 
 
-== Alterar as instruções do boleto na página de "obrigado" (thankyou page) ==
+= Alterar as instruções do boleto na página de "obrigado" (thankyou page): =
 
 
 	/**
@@ -150,7 +150,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 	add_filter( 'woocommerce_cobregratis_thankyou_page_instructions', 'custom_woocommerce_cobregratis_thankyou_page_instructions', 10, 2 );
 
 
-== Alterar as instruções do boleto no e-mail ==
+= Alterar as instruções do boleto no e-mail: =
 
 
 	/**
@@ -168,7 +168,7 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 	add_filter( 'woocommerce_cobregratis_email_instructions', 'custom_woocommerce_cobregratis_email_instructions', 10, 2 );
 
 
-== Alterar as instruções do boleto para pedidos que estão aguardando pagamento ==
+= Alterar as instruções do boleto para pedidos que estão aguardando pagamento: =
 
 
 	/**

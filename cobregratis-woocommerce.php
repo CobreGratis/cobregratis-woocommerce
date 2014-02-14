@@ -112,7 +112,7 @@ function wc_cobregratis_pending_payment_instructions( $order_id ) {
 		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', 'cobregratis-woocommerce' ) . '<br />';
 		$message .= __( 'Ignore this message if the payment has already been made​​.', 'cobregratis-woocommerce' ) . '<br />';
 
-		$html .= apply_filters( 'wc_cobregratis_pending_payment_instructions', $message, $order );
+		$html .= apply_filters( 'woocommerce_cobregratis_pending_payment_instructions', $message, $order );
 
 		$html .= '</div>';
 

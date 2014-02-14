@@ -197,7 +197,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'code' => array(
 				'title'       => __( 'Webhook security code', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Please enter your webhook security code. This is needed to receive notifications when the billet is paid.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can configure a webhook by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/services" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ) . '<br />' . sprintf( __( 'Be sure to set the %s url for your webhook.', $this->plugin_slug ), '<code>' . home_url( '/?wc-api=WC_Cobregratis_Gateway' ) . '</code>' ),
+				'description' => __( 'Please enter your webhook security code. This is needed to receive notifications when the billet is paid.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can configure a webhook by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/services/new" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ) . '<br />' . sprintf( __( 'Be sure to set the %s url for your webhook.', $this->plugin_slug ), '<code>' . home_url( '/?wc-api=WC_Cobregratis_Gateway' ) . '</code>' ),
 				'default'     => ''
 			),
 			'options' => array(
@@ -456,14 +456,16 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 * @return string           Payment instructions.
 	 */
 	public function thankyou_page( $order_id ) {
+		$url = get_post_meta( $order_id, 'cobregratis_url', true );
+
 		$html = '<div class="woocommerce-message">';
-		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order_id, 'cobregratis_url', true ), __( 'Billet print', $this->plugin_slug ) );
+		$html .= sprintf( '<a class="button" href="%s" target="_blank">%s</a>', $url, __( 'Billet print', $this->plugin_slug ) );
 
 		$message = sprintf( __( '%sAttention!%s You will not get the billet by Correios.', $this->plugin_slug ), '<strong>', '</strong>' ) . '<br />';
 		$message .= __( 'Please click the following button and pay the billet in your Internet Banking.', $this->plugin_slug ) . '<br />';
 		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', $this->plugin_slug ) . '<br />';
 
-		$html .= apply_filters( 'woocommerce_cobregratis_thankyou_page_instructions', $message );
+		$html .= apply_filters( 'woocommerce_cobregratis_thankyou_page_instructions', $message, $order_id );
 
 		$html .= '</div>';
 
@@ -493,7 +495,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 		$message .= __( 'Please click the following link and pay the billet in your Internet Banking.', $this->plugin_slug ) . '<br />';
 		$message .= __( 'If you prefer, print and pay at any bank branch or home lottery.', $this->plugin_slug ) . '<br />';
 
-		$html .= apply_filters( 'woocommerce_cobregratis_email_instructions', $message );
+		$html .= apply_filters( 'woocommerce_cobregratis_email_instructions', $message, $order );
 
 		$html .= '<br />' . sprintf( '<a class="button" href="%s" target="_blank">%s</a>', get_post_meta( $order->id, 'cobregratis_url', true ), __( 'Billet print &rarr;', $this->plugin_slug ) ) . '<br />';
 

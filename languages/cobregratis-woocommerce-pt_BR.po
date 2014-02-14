@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cobre Grátis for WooCommerce v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-01-18 04:12:54+0000\n"
+"PO-Revision-Date: 2014-02-14 17:12:49+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -308,7 +308,7 @@ msgstr "Por favor, digite o seu código de segurança do webhook. Isto é necess
 #, php-format
 #@ cobregratis-woocommerce
 msgid "You can configure a webhook by clicking %s."
-msgstr "Você pode configurar um webhook clicando aqui."
+msgstr "Você pode configurar um webhook clicando %s."
 
 #: includes/class-wc-cobregratis-gateway.php:200
 #, php-format

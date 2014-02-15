@@ -13,11 +13,11 @@ Start getting money by bank billet in your checking account using Cobre Grátis
 
 ### Description (en): ###
 
-Start getting money by bank billet in your checking account using **Cobre Grátis**.
+Start getting money by bank billet in your checking account using **[Cobre Grátis](http://cobregratis.com.br/)**.
 
 ### Descrição (pt_BR): ###
 
-Comece a receber dinheiro por boleto bancário direto na sua conta corrente usando o **Cobre Grátis**. Sem limites e sem taxa por boleto.
+Comece a receber dinheiro por boleto bancário direto na sua conta corrente usando o **[Cobre Grátis](http://cobregratis.com.br/)**. Sem limites e sem taxa por boleto.
 
 ### Como Funciona o Boleto Bancário ###
 

@@ -29,6 +29,27 @@ O Boleto Bancário é uma forma de pagamento exclusiva do Brasil. Qualquer pesso
 
 A integração é completa para vender por boleto e ainda conta com sistema de retorno que avisa quando o boleto é pago, atualizando o status do seu pedido para *processando*.
 
+É possível integrar com os seguintes bancos:
+
+* Banco do Brasil
+* Banespa
+* Banrisul
+* Santander
+* Sicredi
+* Real
+* Itaú
+* Bradesco
+* HSBC
+* Caixa Econômica Federal
+* Nossa Caixa
+* BCN
+* Sudameris
+* FINASA
+* Unibanco
+* Safra
+* Citibank
+* Bancoob/Sicoob
+
 = Instalação =
 
 Instalar é bem simples, basta seguir o nosso [guia de instalação](http://wordpress.org/extend/plugins/cobregratis-woocommerce/installation/).
@@ -89,6 +110,45 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 * Ativar a integração do serviço com a opção **Usar integração de notificação de pagamento**;
 * Gerar um **Código de Segurança** para a integração do serviço;
 * Configurar uma **URL para webhook de pagamento de boletos**.
+
+= O que é o Cobre Grátis? =
+
+O Cobre Grátis é um sistema que funciona na web, feito para que qualquer pessoa possa gerar boletos bancários e gerenciar suas cobranças. Com o Cobre Grátis é possível cadastrar os dados da cobrança que ele gera o boleto bancário para ser enviado para o cliente pagar. Os bancos possuem seus próprios sistemas para isso, mas no Cobre Grátis é possível emitir boletos para diversos bancos e gerenciar todas as cobranças em um só lugar. Além de possuir diversos recursos que outros sistemas não oferecem.
+
+= Quais são os pré-requisitos para usar o Cobre Grátis? =
+
+Para usar o Cobre Grátis é necessário:
+
+1. Ter uma conta corrente em banco;
+2. Possuir um contrato de cobrança (chamada de carteira de cobrança);
+3. Ter em mãos os dados da conta corrente e os dados da carteira de cobrança;
+4. Possuir um computador com acesso à internet;
+
+= Quais os bancos e carteiras suportadas? =
+
+* **Banco do Brasil** - 18-17, 18-027, 17-019, 18-019 (Convênio com 7 dígitos), 18-019 (Convênio com 6 dígitos), 18-019 (Convênio com 8 dígitos)
+* **Banespa** - 008
+* **Banrisul** - Cob. Direta
+* **Santander** - 102
+* **Sicredi** - A (Simples)
+* **Real** - 57
+* **Itaú** - 179, 175, 109, 174, 176, 178, 157
+* **Bradesco** - 06, 09, 25, 03
+* **HSBC** - CNR, CNR Fácil
+* **Caixa Econômica Federal** - SIGCB: 24 ou 02, SINCO, SR (80), SR (82), CR (90), SR5
+* **Nossa Caixa** - CIDENT
+* **BCN** - 1
+* **Sudameris** - Cobrança Simples
+* **FINASA** - 27
+* **Unibanco** - Cob Especial
+* **Safra** - 4
+* **Citibank** - 3 - Cobrança Comum, 4 - Cobrança de Seguro
+* **Bancoob/Sicoob** - 01, 02
+
+= Mais dúvidas de como funciona o Cobre Grátis? =
+
+Acesse a [FAQ do Cobre Grátis](http://suporte.cobregratis.com.br/hc/pt-br).
+
 
 == For Developers ==
 

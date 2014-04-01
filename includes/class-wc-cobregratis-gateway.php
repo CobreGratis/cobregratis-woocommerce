@@ -377,15 +377,15 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 					$this->log->add( $this->id, 'Error while parsing the Cobre Gratis response: ' . print_r( $e->getMessage(), true ) );
 				}
 			}
-
-			if ( isset( $data->bank_billet ) ) {
+      
+			if ( isset( $data->id ) ) {
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->bank_billet->id );
+					$this->log->add( $this->id, 'Billet created with success! The ID is: ' . $data->id );
 				}
 
 				// Save billet data in order meta.
-				add_post_meta( $order->id, 'cobregratis_id', $data->bank_billet->id );
-				add_post_meta( $order->id, 'cobregratis_url', $data->bank_billet->external_link );
+				add_post_meta( $order->id, 'cobregratis_id', $data->id );
+				add_post_meta( $order->id, 'cobregratis_url', $data->external_link );
 
 				return true;
 			}

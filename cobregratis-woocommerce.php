@@ -11,7 +11,7 @@
  * Plugin Name:       Cobre Grátis for WooCommerce
  * Plugin URI:        https://github.com/BielSystems/cobregratis-woocommerce
  * Description:       Start getting money by bank billet in your checking account using Cobre Grátis
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            BielSystems, claudiosanches
  * Author URI:        http://cobregratis.com.br/
  * Text Domain:       cobregratis-woocommerce

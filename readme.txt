@@ -3,7 +3,7 @@ Contributors: claudiosanches
 Tags: checkout, billet, boleto, cobregratis
 Requires at least: 3.5
 Tested up to: 3.9
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,15 +252,19 @@ Acesse a [FAQ do Cobre Grátis](http://suporte.cobregratis.com.br/hc/pt-br).
 
 == Changelog ==
 
+= 1.0.1 - 17/05/2014 =
+
+* Corrigida a geração de boletos.
+
 = 1.0.0 =
 
-* Initial release.
+* Versão inicial.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 1.0.1 =
 
-* Initial release.
+* Corrigida a geração de boletos.
 
 == License ==
 

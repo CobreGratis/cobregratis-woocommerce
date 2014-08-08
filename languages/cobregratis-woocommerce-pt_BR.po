@@ -29,8 +29,8 @@ msgstr "Cobre Grátis para WooCommerce"
 #. translators: plugin header field 'PluginURI'
 #: cobregratis-woocommerce.php:0
 #@ cobregratis-woocommerce
-msgid "https://github.com/BielSystems/cobregratis-woocommerce"
-msgstr "https://github.com/BielSystems/cobregratis-woocommerce"
+msgid "https://github.com/Cobre Grátis/cobregratis-woocommerce"
+msgstr "https://github.com/Cobre Grátis/cobregratis-woocommerce"
 
 #. translators: plugin header field 'Description'
 #: cobregratis-woocommerce.php:0
@@ -41,8 +41,8 @@ msgstr "Comece a receber dinheiro por boleto bancário e recebendo em usa conta 
 #. translators: plugin header field 'Author'
 #: cobregratis-woocommerce.php:0
 #@ cobregratis-woocommerce
-msgid "BielSystems, claudiosanches"
-msgstr "BielSystems, claudiosanches"
+msgid "Cobre Grátis, claudiosanches"
+msgstr "Cobre Grátis, claudiosanches"
 
 #. translators: plugin header field 'AuthorURI'
 #: cobregratis-woocommerce.php:0

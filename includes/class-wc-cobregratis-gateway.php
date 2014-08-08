@@ -5,7 +5,7 @@
  * @package   WC_Cobregratis
  * @author    Claudio Sanches <contato@claudiosmweb.com>
  * @license   GPL-2.0+
- * @copyright 2013 BielSystems
+ * @copyright 2013 Cobre Grátis
  */
 
 /**

@@ -63,12 +63,12 @@ Compatível com as versões 2.0.x e 2.1.x do WooCommerce.
 Você pode esclarecer suas dúvidas usando:
 
 * A nossa sessão de [FAQ](http://wordpress.org/extend/plugins/cobregratis-woocommerce/faq/).
-* Criando um tópico no [fórum do GitHub](https://github.com/BielSystems/cobregratis-woocommerce/issues).
+* Criando um tópico no [fórum do GitHub](https://github.com/Cobre Grátis/cobregratis-woocommerce/issues).
 * Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/cobregratis-woocommerce) (apenas em inglês).
 
 ### Coloborar ###
 
-Você pode contribuir com código-fonte em nossa página no [GitHub](https://github.com/BielSystems/cobregratis-woocommerce).
+Você pode contribuir com código-fonte em nossa página no [GitHub](https://github.com/Cobre Grátis/cobregratis-woocommerce).
 
 ## Installation ##
 
@@ -184,7 +184,7 @@ Acesse a [FAQ do Cobre Grátis](http://suporte.cobregratis.com.br/hc/pt-br).
 	 */
 	function custom_woocommerce_cobregratis_billet_data( $data, $order ) {
 		// aqui você pode trabalhar e alterar o array $data com o que desejar.
-		// Api do Cobre Grátis: https://github.com/BielSystems/cobregratis-api
+		// Api do Cobre Grátis: https://github.com/Cobre Grátis/cobregratis-api
 
 		return $data;
 	}

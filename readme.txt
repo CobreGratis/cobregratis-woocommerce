@@ -79,20 +79,22 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 
 = Configuração do Cobre Grátis =
 
-1. Crie uma conta Premium ou Max no [Cobre Grátis](http://cobregratis.com.br/planos/);
+1. Crie uma conta e contrate um Plano Pago no [Cobre Grátis](http://cobregratis.com.br/planos/);
 2. Com a conta é possível gerar um Token em [Cobre Grátis - Minhas informações](https://app.cobregratis.com.br/myinfo);
-3. E finalmente crie um serviço em [Cobre Grátis - Serviços](https://app.cobregratis.com.br/services/new);
-4. No serviço criado ative a opção **Usar integração de notificação de pagamento**;
-5. Crie um **Código de Segurança** para a integração do serviço;
-6. E configure a **URL para webhook de pagamento de boletos** como por exemplo `http://seusite.com.br/?wc-api=WC_Cobregratis_Gateway`;
-7. Pronto, conta configurada.
+3. E finalmente crie uma notificação em [Cobre Grátis - Notificações](https://app.cobregratis.com.br/web_hooks/new);
+4. Na notificação criada:;
+5. Escolha o evento 'Pago';
+6. Escolha a situação 'Ativo';
+7. Crie um **Código de Segurança**;
+8. E configure a **URL para notificação** como por exemplo `http://seusite.com.br/?wc-api=WC_Cobregratis_Gateway`;
+9. Pronto, conta configurada.
 
 = Configuração do plugin =
 
 1. Vá até `WooCommerce > Configurações > Finalizar compra > Cobre Grátis`;
 2. Habilite o **Cobre Grátis** e preencha como preferir as opções de *Título* de *Descrição*;
 3. Digite o token gerado na sua conta do **Cobre Grátis**;
-4. Por final preencha também a opção *Código de segurança do webhook*;
+4. Por final preencha também a opção *Código de segurança da notificação*;
 5. Salve as configurações;
 6. Vá até `WooCommerce > Configurações > Produtos > Inventário`;
 7. Deixe em branco a opção **Manter estoque (minutos)** (isso evita problemas com contas canceladas antes do cliente pagar o boleto).
@@ -104,12 +106,14 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 = O que eu preciso para utilizar este plugin? =
 
 * Ter instalado o WooCommerce 2.0.x ou superior.
-* Uma conta Premium ou Max no [Cobre Grátis](http://cobregratis.com.br/planos/);
-* Gerar um token de segurança na sua conta em [Cobre Grátis - Minhas informações](https://app.cobregratis.com.br/myinfo);
-* Criar um serviço em [Cobre Grátis - Serviços](https://app.cobregratis.com.br/services/new);
-* Ativar a integração do serviço com a opção **Usar integração de notificação de pagamento**;
-* Gerar um **Código de Segurança** para a integração do serviço;
-* Configurar uma **URL para webhook de pagamento de boletos**.
+* Com a conta é possível gerar um Token em [Cobre Grátis - Minhas informações](https://app.cobregratis.com.br/myinfo);
+* E finalmente crie uma notificação em [Cobre Grátis - Notificações](https://app.cobregratis.com.br/web_hooks/new);
+* Na notificação criada:;
+* Escolha o evento 'Pago';
+* Escolha a situação 'Ativo';
+* Crie um **Código de Segurança**;
+* E configure a **URL para notificação** como por exemplo `http://seusite.com.br/?wc-api=WC_Cobregratis_Gateway`;
+* Pronto, conta configurada.
 
 = O que é o Cobre Grátis? =
 

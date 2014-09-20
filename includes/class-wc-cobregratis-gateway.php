@@ -197,7 +197,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'code' => array(
 				'title'       => __( 'Webhook security code', $this->plugin_slug ),
 				'type'        => 'text',
-				'description' => __( 'Please enter your webhook security code. This is needed to receive notifications when the billet is paid.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can configure a webhook by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/services/new" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ) . '<br />' . sprintf( __( 'Be sure to set the %s url for your webhook.', $this->plugin_slug ), '<code>' . home_url( '/?wc-api=WC_Cobregratis_Gateway' ) . '</code>' ),
+				'description' => __( 'Please enter your notification security code. This is needed to receive notifications when the billet is paid.', $this->plugin_slug ) . '<br />' . sprintf( __( 'You can configure a notification by clicking %s.', $this->plugin_slug ), '<a href="https://app.cobregratis.com.br/web_hooks/new" target="_blank">' . __( 'here', $this->plugin_slug ) . '</a>' ) . '<br />' . sprintf( __( 'Be sure to set the %s url for your notification.', $this->plugin_slug ), '<code>' . home_url( '/?wc-api=WC_Cobregratis_Gateway' ) . '</code>' ),
 				'default'     => ''
 			),
 			'options' => array(
@@ -523,7 +523,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	}
 
 	/**
-	 * Successful webhook notification.
+	 * Successful notification.
 	 *
 	 * @since  1.0.0
 	 *
@@ -533,7 +533,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 */
 	public function successful_webhook_notification( $data ) {
 		if ( 'yes' == $this->debug ) {
-			$this->log->add( $this->id, 'Received the webhook notification with the following data: ' . print_r( $data, true ) );
+			$this->log->add( $this->id, 'Received the notification with the following data: ' . print_r( $data, true ) );
 		}
 
 		$order_id = intval( str_replace( 'order-', '', $data['meta'] ) );
@@ -582,7 +582,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 	 * @return string Error Mensage.
 	 */
 	public function code_missing_message() {
-		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your webhook security code. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
+		echo '<div class="error"><p><strong>' . __( 'Cobre Gr&aacute;tis', $this->plugin_slug ) . '</strong>: ' . sprintf( __( 'You should inform your notification security code. %s', $this->plugin_slug ), '<a href="' . $this->admin_url() . '">' . __( 'Click here to configure!', $this->plugin_slug ) . '</a>' ) . '</p></div>';
 	}
 
 	/**

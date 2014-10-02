@@ -2,7 +2,7 @@
 **Contributors:** claudiosanches  
 **Tags:** checkout, billet, boleto, cobregratis  
 **Requires at least:** 3.5  
-**Tested up to:** 3.9  
+**Tested up to:** 4.0  
 **Stable tag:** 1.0.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -253,7 +253,7 @@ Acesse a [FAQ do Cobre Grátis](http://suporte.cobregratis.com.br/hc/pt-br).
 ## Screenshots ##
 
 ### 1. Plugin Settings. ###
-![1. Plugin Settings.](http://s.wordpress.org/extend/plugins/cobre-grátis-woocommerce/screenshot-1.png)
+![1. Plugin Settings.](http://ps.w.org/cobre-grátis-woocommerce/assets/screenshot-1.png)
 
 
 ## Changelog ##

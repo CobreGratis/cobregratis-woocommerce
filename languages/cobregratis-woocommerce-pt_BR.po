@@ -29,8 +29,8 @@ msgstr "Cobre Grátis para WooCommerce"
 #. translators: plugin header field 'PluginURI'
 #: cobregratis-woocommerce.php:0
 #@ cobregratis-woocommerce
-msgid "https://github.com/BielSystems/cobregratis-woocommerce"
-msgstr "https://github.com/BielSystems/cobregratis-woocommerce"
+msgid "https://github.com/Cobre Grátis/cobregratis-woocommerce"
+msgstr "https://github.com/Cobre Grátis/cobregratis-woocommerce"
 
 #. translators: plugin header field 'Description'
 #: cobregratis-woocommerce.php:0
@@ -41,8 +41,8 @@ msgstr "Comece a receber dinheiro por boleto bancário e recebendo em usa conta 
 #. translators: plugin header field 'Author'
 #: cobregratis-woocommerce.php:0
 #@ cobregratis-woocommerce
-msgid "BielSystems, claudiosanches"
-msgstr "BielSystems, claudiosanches"
+msgid "Cobre Grátis, claudiosanches"
+msgstr "Cobre Grátis, claudiosanches"
 
 #. translators: plugin header field 'AuthorURI'
 #: cobregratis-woocommerce.php:0
@@ -296,25 +296,25 @@ msgstr "Comece a ganhar dinheiro por boleto bancário e recebendo em sua conta u
 
 #: includes/class-wc-cobregratis-gateway.php:198
 #@ cobregratis-woocommerce
-msgid "Webhook security code"
-msgstr " Código de segurança do webhook"
+msgid "Notification security code"
+msgstr " Código de segurança da notificação"
 
 #: includes/class-wc-cobregratis-gateway.php:200
 #@ cobregratis-woocommerce
-msgid "Please enter your webhook security code. This is needed to receive notifications when the billet is paid."
-msgstr "Por favor, digite o seu código de segurança do webhook. Isto é necessário para receber notificações sobre boletos pagos."
-
-#: includes/class-wc-cobregratis-gateway.php:200
-#, php-format
-#@ cobregratis-woocommerce
-msgid "You can configure a webhook by clicking %s."
-msgstr "Você pode configurar um webhook clicando %s."
+msgid "Please enter your notification security code. This is needed to receive notifications when the billet is paid."
+msgstr "Por favor, digite o seu código de segurança da notificação. Isto é necessário para receber notificações sobre boletos pagos."
 
 #: includes/class-wc-cobregratis-gateway.php:200
 #, php-format
 #@ cobregratis-woocommerce
-msgid "Be sure to set the %s url for your webhook."
-msgstr "Tenha certeza que configurou este link %s em seu webhook."
+msgid "You can configure a notification by clicking %s."
+msgstr "Você pode configurar uma notificação clicando %s."
+
+#: includes/class-wc-cobregratis-gateway.php:200
+#, php-format
+#@ cobregratis-woocommerce
+msgid "Be sure to set the %s url for your notification."
+msgstr "Tenha certeza que configurou este link %s em sua notificação."
 
 #: includes/class-wc-cobregratis-gateway.php:519
 #@ cobregratis-woocommerce
@@ -329,6 +329,6 @@ msgstr "Cobre Grátis: Pagamento aprovado."
 #: includes/class-wc-cobregratis-gateway.php:583
 #, php-format
 #@ cobregratis-woocommerce
-msgid "You should inform your webhook security code. %s"
-msgstr "Você precisa informar o seu código de segurança do webhook. %s"
+msgid "You should inform your notification security code. %s"
+msgstr "Você precisa informar o seu código de segurança da notificação. %s"
 

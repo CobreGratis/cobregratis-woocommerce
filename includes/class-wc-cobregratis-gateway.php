@@ -292,7 +292,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 
 		// WooCommerce Extra Checkout Fields for Brazil person type fields.
 		if ( isset( $order->billing_persontype ) && ! empty( $order->billing_persontype ) ) {
-			if ( 2 == $order->billing_persontyp ) {
+			if ( 2 == $order->billing_persontype ) {
 				$args['cnpj_cpf'] = $order->billing_cnpj;
 			} else {
 				$args['cnpj_cpf'] = $order->billing_cpf;

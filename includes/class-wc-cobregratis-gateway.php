@@ -287,7 +287,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			'percent_interest_day' => $this->interest_day,
 
 			// Meta for IPN.
-			'meta'                 => 'order-' . $this->id
+			'meta'                 => 'order-' . $order->id
 		);
 
 		// WooCommerce Extra Checkout Fields for Brazil person type fields.

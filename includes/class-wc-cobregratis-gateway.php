@@ -536,7 +536,7 @@ class WC_Cobregratis_Gateway extends WC_Payment_Gateway {
 			$this->log->add( $this->id, 'Received the notification with the following data: ' . print_r( $data, true ) );
 		}
 
-		$order_id = intval( $data['document_number'] );
+		$order_id = intval( str_replace( 'order-', '', $data['meta'] ) );
 		$order = new WC_Order( $order_id );
 
 		if ( 'yes' == $this->debug ) {
